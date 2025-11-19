@@ -1,1 +1,1 @@
-Yeni blog oluşturuldu.
+title=XXX&content=YYY
