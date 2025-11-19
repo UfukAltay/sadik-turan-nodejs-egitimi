@@ -1,41 +1,30 @@
 var http = require("http"); // http modülünü yüklüyoruz
+var fs = require("fs"); // dosya sistemi modülünü yüklüyoruz
 
 // ya da arrow function ile de tanımlayabiliriz
 var server = http.createServer((request, response) => {
     
-        if (request.url == '/') {
-            response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-            response.write(`
-                <html>
-                    <head>
-                        <title>anasayfa</title>
-                    </head>
-                    <body>
-                        <h1>Anasayfa</h1>
-                    </body>
-                </html>`);
-            
-                response.end();
-        }
-        else if (request.url == '/hakkimda') {
-            response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-            response.write(`
-                <html>
-                    <head>
-                        <title>hakkimda</title>
-                    </head>
-                    <body>
-                        <h1>Hakkımda</h1>
-                    </body>
-                </html>`);
-            
-                response.end();
-        }
-        else {
-            response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-            response.write("<h1>404 - Sayfa Bulunamadı</h1>");
-            response.end();    
-}
+    if (request.url == '/') {
+        fs.readFile("index.html", (err, data) => {
+        response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        response.write(data);            
+        response.end();
+        });
+    }
+    else if (request.url == '/blogs') {
+        fs.readFile("blogs.html", (err, data) => {
+        response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        response.write(data);            
+        response.end();
+        });
+    }
+    else {
+        fs.readFile("404.html", (err, data) => {
+        response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+        response.write(data);            
+        response.end();
+        });
+    }
 });
 
 
