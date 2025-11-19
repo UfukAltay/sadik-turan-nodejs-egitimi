@@ -18,6 +18,25 @@ var server = http.createServer((request, response) => {
         response.end();
         });
     }
+    else if (request.url == '/create' && request.method == 'POST') {
+        fs.appendFile("created_blogs.txt", "Yeni blog oluşturuldu.\n", (err) => {
+            if (err) {
+                throw err;                
+            }
+            else {
+                response.statusCode = 302;
+                response.setHeader('Location', '/blogs');
+                response.end();                
+            }            
+        });        
+    }
+    else if (request.url == '/create') {
+        fs.readFile("create.html", (err, data) => {
+        response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        response.write(data);            
+        response.end();
+        });
+    }    
     else {
         fs.readFile("404.html", (err, data) => {
         response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
