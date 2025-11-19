@@ -1,1 +1,1 @@
-title=XXX&content=YYY
+title=XXX&content=YYYtitle=Deneme&content=Deneme
